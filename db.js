@@ -1,2 +1,5 @@
 const mongoose = require("mongoose");
-mongoose.connect("mongodb://localhost/todos", { useNewUrlParser: true, useCreateIndex: true });
+mongoose.set('debug', true);
+mongoose.connect("mongodb://localhost/todo-api", { useNewUrlParser: true, useCreateIndex: true });
+
+mongoose.Promise = Promise;

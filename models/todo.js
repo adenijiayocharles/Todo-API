@@ -6,7 +6,7 @@ const todoSchema = mongoose.Schema({
     },
     completed: {
         type: Boolean,
-        default: true
+        default: false
     },
     created_date: {
         type: Date,

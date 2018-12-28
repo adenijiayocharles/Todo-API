@@ -50,6 +50,10 @@ document.querySelector(".todoInput").addEventListener("keypress", (e) => {
 function createTodo(){
     let xhr = new XMLHttpRequest();
     let userInput = document.querySelector("#name").value;
+    if(userInput == "" || userInput == " "){
+        alert("Please enter a value");
+        return false;
+    }
     xhr.open("POST", "https://restfulltodo.herokuapp.com/api/todos/", true);
     xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
     xhr.onload = function(){

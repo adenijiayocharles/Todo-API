@@ -10,15 +10,44 @@ window.addEventListener("load", function (){
 });
 
 function addTodos(todos){
-    console.log(todos);
-    const ul = document.querySelector(".list-group");
-    let li = "";
     (todos.todos).forEach(todo => {
-        if(todo.completed){
-            li += `<li class="list-group-item"><s>${todo.name}</s></li>`;
-        }else{
-            li += `<li class="list-group-item">${todo.name}</li>`;
+        addTodo(todo);
+    });   
+}
+
+function addTodo(todo){
+    const ul = document.querySelector(".list-group");
+    let listNode = document.createElement("li");
+    let textNode = document.createTextNode(todo.name);    
+    listNode.appendChild(textNode);
+    listNode.setAttribute("class", "list-group-item");
+    if(todo.completed){
+        listNode.classList.add("done");
+    }
+    ul.appendChild(listNode);
+}
+
+document.querySelector(".todoInput").addEventListener("keypress", (e) => {
+    if(e.keyCode == 13){
+        createTodo();
+    }
+});
+
+function createTodo(){
+    let xhr = new XMLHttpRequest();
+    let userInput = document.querySelector("#name").value;
+    xhr.open("POST", "https://restfulltodo.herokuapp.com/api/todos/", true);
+    xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+    xhr.onload = function(){
+        console.log(userInput);
+        if(xhr.status === 201){
+           let todo = JSON.parse(xhr.responseText).todo;
+           addTodo(todo);
+           document.querySelector("#name").value = "";
         }
-    });
-    ul.innerHTML = li;
+    }
+    xhr.send(JSON.stringify({ 
+            "name": userInput,
+        })
+    );    
 }

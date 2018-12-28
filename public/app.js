@@ -3,8 +3,17 @@ window.addEventListener("load", function (){
     xhr.open("GET", "https://restfulltodo.herokuapp.com/api/todos", true);
     xhr.onload = function(){
         if(xhr.status === 200){
-            console.log(xhr.responseText);
+            addTodos(JSON.parse(xhr.responseText));
         }
     }
     xhr.send();
 });
+
+function addTodos(todos){
+    const ul = document.querySelector(".list-group");
+    let li = "";
+    (todos.todos).forEach(todo => {
+        li += `<li class="list-group-item">${todo.name}</li>`;
+    });
+    ul.innerHTML = li;
+}

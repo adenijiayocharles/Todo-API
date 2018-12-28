@@ -18,12 +18,26 @@ function addTodos(todos){
 function addTodo(todo){
     const ul = document.querySelector(".list-group");
     let listNode = document.createElement("li");
+    listNode.setAttribute("data-id", todo._id);
     let textNode = document.createTextNode(todo.name);    
+
+
+    let span = document.createElement("span");
+    span.setAttribute("onclick","removeTodo(this);");
+
+    let deleteIcon = document.createElement("i");
+    deleteIcon.classList.add("fa");
+    deleteIcon.classList.add("fa-trash");
+    span.appendChild(deleteIcon);
+
+
     listNode.appendChild(textNode);
     listNode.setAttribute("class", "list-group-item");
     if(todo.completed){
         listNode.classList.add("done");
     }
+
+    listNode.appendChild(span);
     ul.appendChild(listNode);
 }
 
@@ -50,4 +64,16 @@ function createTodo(){
             "name": userInput,
         })
     );    
+}
+
+function removeTodo(arg){
+    let todoId = arg.parentElement.getAttribute("data-id");
+    let xhr = new XMLHttpRequest();
+    xhr.open("DELETE", `https://restfulltodo.herokuapp.com/api/todos/${todoId}`, true);
+    xhr.onload = function(){
+        if(xhr.status === 200){
+            arg.parentElement.style.display = "none";
+        }
+    }
+    xhr.send(null);
 }

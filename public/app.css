@@ -1,3 +1,18 @@
 .done{
     text-decoration: line-through;
 }
+
+li span{
+    float: right;
+    color: #C0392b;
+    transition: all 0.3s;
+    opacity: 0;
+}
+
+li:hover span{
+    opacity: 1;
+}
+
+li span:hover{
+    color: #e74c3c;
+}

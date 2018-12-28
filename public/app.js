@@ -13,6 +13,9 @@ function addTodos(todos){
     const ul = document.querySelector(".list-group");
     let li = "";
     (todos.todos).forEach(todo => {
+        if(todo.completed){
+            li += `<li class="list-group-item"><s>${todo.name}</s></li>`;
+        }
         li += `<li class="list-group-item">${todo.name}</li>`;
     });
     ul.innerHTML = li;

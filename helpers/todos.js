@@ -34,7 +34,7 @@ exports.getTodo = function(req, res){
 }
 
 exports.updateTodo = function(req, res){
-    Todo.findByIdAndUpdate(req.params.todoId, req.body, (err, todo) => {
+    Todo.findByIdAndUpdate(req.params.todoId, req.body,{ new: true }, (err, todo) => {
         if(err) return res.status(500).json(err);
         res.status(200).json({
             status: "success",

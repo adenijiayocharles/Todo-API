@@ -10,13 +10,15 @@ window.addEventListener("load", function (){
 });
 
 function addTodos(todos){
+    console.log(todos);
     const ul = document.querySelector(".list-group");
     let li = "";
     (todos.todos).forEach(todo => {
         if(todo.completed){
             li += `<li class="list-group-item"><s>${todo.name}</s></li>`;
+        }else{
+            li += `<li class="list-group-item">${todo.name}</li>`;
         }
-        li += `<li class="list-group-item">${todo.name}</li>`;
     });
     ul.innerHTML = li;
 }

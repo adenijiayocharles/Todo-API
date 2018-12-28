@@ -1,4 +1,4 @@
-# Todo API
+# Todo API - work in progress
 * Web Application [view](https://restfulltodo.herokuapp.com)
 * API 
     * Default route [view](https://restfulltodo.herokuapp.com/api/todos)
